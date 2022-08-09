@@ -128,7 +128,6 @@ def _exmp_pizza():
     frame = _align(table_w, frame, 'c')
     _display(table_w, frame)
 
-
 _exmp_text()
 _exmp_bar()
 _exmp_pizza()
