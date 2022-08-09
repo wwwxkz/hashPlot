@@ -15,6 +15,7 @@
 # the interactive shell 
 
 # TODO
+# - improve bar graph legend logic
 # - improve pizza graph logic
 # - add function_graph
 # - func names
@@ -36,6 +37,15 @@ def _bar_graph(table_w, bar_w, columns):
                 frame[line] += ' ' + '#' * bar_w
             except:
                 frame.insert(line, ' ' + '#' * bar_w)
+    for c, column in enumerate(columns):
+        try:
+            if c == 0:
+                frame[:0] = ' ' 
+                frame[0] = ' ' + column[1]
+            else:
+                frame[0] += ' ' + column[1]
+        except:
+            frame.insert(0, ' ' + column[1])
     # Reverse frame as array starts from top and frames and graphs from bottom
     return frame[::-1]
 
