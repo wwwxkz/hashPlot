@@ -15,15 +15,28 @@
 # the interactive shell 
 
 
-def _display(table_w, frame):
+def _display(frame, table_w):
     print('-' * table_w)
-    for i, line in enumerate(frame): 
-        spaces = int(table_w - len(line)) - 5
-        print('|', 
-                ' ' * spaces , 
-                line, 
-              '|')
+    for line in frame:
+        print('|' + line + '|')
     print('-' * table_w)
+
+#def _bar_graph()
+#def _pizza_graph()
+#def _function()
+
+def _align(frame, table_w, direction):
+    for i, line in enumerate(frame):
+        spaces = int(table_w - len(line)) - 2
+        if direction == 'r':
+            frame[i] = ' ' * spaces + line
+        elif direction == 'l':
+            frame[i] = line + ' ' * spaces
+        elif direction ==  'c':
+            frame[i] = ' ' * int(spaces/2) + line + ' ' * int(spaces/2)
+        else:
+            print('Invalid direction')
+    return frame
 
 # Frame
 frame = [
@@ -33,7 +46,8 @@ frame = [
     'Is that even a question?'
 ]
 
-_display(40, frame)
+frame = _align(frame, 40, 'c')
+_display(frame, 40)
 
 
 
