@@ -14,6 +14,13 @@
 # In python just because it is easy, and I was playing around with
 # the interactive shell 
 
+# TODO
+# - improve pizza graph logic
+# - add function_graph
+# - func names
+# - interactive shell
+# - multiple screens
+# - change func in the interactive shell
 
 def _display(table_w, frame):
     print('-' * table_w)
@@ -23,7 +30,7 @@ def _display(table_w, frame):
 
 def _bar_graph(table_w, bar_w, columns):
     frame = []
-    for i, column in enumerate(columns):
+    for column in columns:
         for line in range(column[0]):
             try:
                 frame[line] += ' ' + '#' * bar_w
@@ -32,8 +39,24 @@ def _bar_graph(table_w, bar_w, columns):
     # Reverse frame as array starts from top and frames and graphs from bottom
     return frame[::-1]
 
-#def _pizza_graph()
-#def _function()
+def _pizza_graph(table_w, table_h, slices):
+    frame = []
+    reverse = False
+    for slice in slices:
+        # Create circle
+        for c, line in enumerate(range(table_h)):
+            if c == table_h/2:
+                reverse = True
+            if reverse == True:
+                c = table_h - c
+            try:
+                frame[line] += '@'
+            except:
+                frame.insert(line, '@' * (2 * c))
+    return frame
+
+def _function_graph():
+    pass
 
 def _align(table_w, frame, direction):
     for i, line in enumerate(frame):
@@ -48,32 +71,49 @@ def _align(table_w, frame, direction):
             print('Invalid direction')
     return frame
 
-# Set table (display) size as a var for convenience
-table_w = 40
+# EXAMPLE DISPLAY TEXT
 
+# Set table (display) size as a var for convenience
+# table_w = 40
 # Display anything you want
-#frame = [
+# frame = [
 #    'True?',
 #    'Small question',
 #    'Trying bigger question',
 #    'Is that even a question?'
-#]
+# ]
+# Align text to R, L, C
+# frame = _align(table_w, frame, 'r')
+# Pass desired frame and table (display) size
+# _display(table_w, frame)
 
+# EXAMPLE BAR GRAPH
 
 # Set bar graph columns as tuple matrixes 
-columns = [
-    (4, 'Russia'),
-    (7, 'Ukraine'),
-    (4, 'Argentina'),
-    (2, 'Japan'),
-    (9, 'Canada')
+# table_w = 40
+# columns = [
+#    (4, 'Russia'),
+#    (7, 'Ukraine'),
+#    (4, 'Argentina'),
+#    (2, 'Japan'),
+#    (9, 'Canada')
+# ]
+# frame = _bar_graph(table_w, 4, columns)
+# frame = _align(table_w, frame, 'l')
+# _display(table_w, frame)
+
+# EXAMPLE PIZZA GRAPH
+
+table_w = 40
+table_h = 10
+slices = [
+    (20, 'New Zeland'),
+    (50, 'Australia'),
+    (10, 'China'),
+    (80, 'Mongolia'),
+    (60, 'Germany'),
+    (50, 'Poland')
 ]
-
-# This time no need to align
-frame = _bar_graph(table_w, 4, columns)
-
-# Align text to R, L, C
-frame = _align(table_w, frame, 'l')
-
-# Pass desired frame and table (display) size
+frame = _pizza_graph(table_w, table_h, slices)
+frame = _align(table_w, frame, 'c')
 _display(table_w, frame)
