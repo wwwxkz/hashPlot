@@ -15,17 +15,27 @@
 # the interactive shell 
 
 
-def _display(frame, table_w):
+def _display(table_w, frame):
     print('-' * table_w)
     for line in frame:
         print('|' + line + '|')
     print('-' * table_w)
 
-#def _bar_graph()
+def _bar_graph(table_w, bar_w, columns):
+    frame = []
+    for i, column in enumerate(columns):
+        for line in range(column[0]):
+            try:
+                frame[line] += ' ' + '#' * bar_w
+            except:
+                frame.insert(line, ' ' + '#' * bar_w)
+    # Reverse frame as array starts from top and frames and graphs from bottom
+    return frame[::-1]
+
 #def _pizza_graph()
 #def _function()
 
-def _align(frame, table_w, direction):
+def _align(table_w, frame, direction):
     for i, line in enumerate(frame):
         spaces = int(table_w - len(line)) - 2
         if direction == 'r':
@@ -38,16 +48,32 @@ def _align(frame, table_w, direction):
             print('Invalid direction')
     return frame
 
-# Frame
-frame = [
-    'True?',
-    'Small question',
-    'Trying bigger question',
-    'Is that even a question?'
+# Set table (display) size as a var for convenience
+table_w = 40
+
+# Display anything you want
+#frame = [
+#    'True?',
+#    'Small question',
+#    'Trying bigger question',
+#    'Is that even a question?'
+#]
+
+
+# Set bar graph columns as tuple matrixes 
+columns = [
+    (4, 'Russia'),
+    (7, 'Ukraine'),
+    (4, 'Argentina'),
+    (2, 'Japan'),
+    (9, 'Canada')
 ]
 
-frame = _align(frame, 40, 'c')
-_display(frame, 40)
+# This time no need to align
+frame = _bar_graph(table_w, 4, columns)
 
+# Align text to R, L, C
+frame = _align(table_w, frame, 'l')
 
-
+# Pass desired frame and table (display) size
+_display(table_w, frame)
