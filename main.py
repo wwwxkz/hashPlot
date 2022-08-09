@@ -72,48 +72,53 @@ def _align(table_w, frame, direction):
     return frame
 
 # EXAMPLE DISPLAY TEXT
-
-# Set table (display) size as a var for convenience
-# table_w = 40
-# Display anything you want
-# frame = [
-#    'True?',
-#    'Small question',
-#    'Trying bigger question',
-#    'Is that even a question?'
-# ]
-# Align text to R, L, C
-# frame = _align(table_w, frame, 'r')
-# Pass desired frame and table (display) size
-# _display(table_w, frame)
+def _exmp_text():
+    # Set table (display) size as a var for convenience
+    table_w = 40
+    # Display anything you want
+    frame = [
+        'True?',
+        'Small question',
+        'Trying bigger question',
+        'Is that even a question?'
+    ]
+    # Align text to R, L, C
+    frame = _align(table_w, frame, 'r')
+    # Pass desired frame and table (display) size
+    _display(table_w, frame)
 
 # EXAMPLE BAR GRAPH
-
-# Set bar graph columns as tuple matrixes 
-# table_w = 40
-# columns = [
-#    (4, 'Russia'),
-#    (7, 'Ukraine'),
-#    (4, 'Argentina'),
-#    (2, 'Japan'),
-#    (9, 'Canada')
-# ]
-# frame = _bar_graph(table_w, 4, columns)
-# frame = _align(table_w, frame, 'l')
-# _display(table_w, frame)
+def _exmp_bar():
+    # Set bar graph columns as tuple matrixes 
+    table_w = 40
+    columns = [
+        (4, 'Russia'),
+        (7, 'Ukraine'),
+        (4, 'Argentina'),
+        (2, 'Japan'),
+        (9, 'Canada')
+    ]
+    frame = _bar_graph(table_w, 4, columns)
+    frame = _align(table_w, frame, 'l')
+    _display(table_w, frame)
 
 # EXAMPLE PIZZA GRAPH
+def _exmp_pizza():
+    table_w = 40
+    table_h = 10
+    slices = [
+        (20, 'New Zeland'),
+        (50, 'Australia'),
+        (10, 'China'),
+        (80, 'Mongolia'),
+        (60, 'Germany'),
+        (50, 'Poland')
+    ]
+    frame = _pizza_graph(table_w, table_h, slices)
+    frame = _align(table_w, frame, 'c')
+    _display(table_w, frame)
 
-table_w = 40
-table_h = 10
-slices = [
-    (20, 'New Zeland'),
-    (50, 'Australia'),
-    (10, 'China'),
-    (80, 'Mongolia'),
-    (60, 'Germany'),
-    (50, 'Poland')
-]
-frame = _pizza_graph(table_w, table_h, slices)
-frame = _align(table_w, frame, 'c')
-_display(table_w, frame)
+
+_exmp_text()
+_exmp_bar()
+_exmp_pizza()
