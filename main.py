@@ -15,6 +15,7 @@
 # the interactive shell 
 
 # TODO
+# - could _bar and _vertical_bar be the same func?
 # - improve bar graph legend logic
 # - improve pizza graph logic
 # - add function_graph
@@ -47,6 +48,21 @@ def _bar_graph(table_w, bar_w, columns):
         except:
             frame.insert(0, ' ' + column[1])
     # Reverse frame as array starts from top and frames and graphs from bottom
+    return frame[::-1]
+
+def _vertical_bar_graph(table_w, bar_h, rows):
+    frame = []
+    # Find the largest label
+    l_label = 0
+    for row in rows:
+        if len(row[1]) > l_label:
+            l_label = len(row[1])
+    for i, row in enumerate(rows):
+        try:
+            frame[i] += '#' * row[0]
+        except:
+            label = row[1] + ' ' * (int(l_label) - int(len(row[1])))
+            frame.insert(i, label + ': ' + '#' * row[0])
     return frame[::-1]
 
 def _pizza_graph(table_w, table_h, slices):
@@ -112,6 +128,7 @@ def _exmp_bar():
     frame = _align(table_w, frame, 'l')
     _display(table_w, frame)
 
+  
 # EXAMPLE PIZZA GRAPH
 def _exmp_pizza():
     table_w = 40
@@ -128,6 +145,21 @@ def _exmp_pizza():
     frame = _align(table_w, frame, 'c')
     _display(table_w, frame)
 
+# EXAMPLE VERTICAL BAR GRAPH
+def _exmp_vertical_bar():
+    table_w = 40
+    rows = [
+        (4, 'Russia'),
+        (7, 'Ukraine'),
+        (4, 'Argentina'),
+        (2, 'Japan'),
+        (9, 'Canada')
+    ]
+    frame = _vertical_bar_graph(table_w, 2, rows)
+    frame = _align(table_w, frame, 'l')
+    _display(table_w, frame)
+
 _exmp_text()
 _exmp_bar()
 _exmp_pizza()
+_exmp_vertical_bar()
