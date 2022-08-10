@@ -87,6 +87,7 @@ class Plotter:
         return frame[::-1]
 
     def pizza(self, radius, slices):
+        # Frame can not initialize empty as using += operator
         frame = [' ']
         last_frame = 0
         rec = 2 * radius + 1
@@ -99,6 +100,7 @@ class Plotter:
                 else:
                     frame[last_frame] += ' '
             last_frame += 1
+            # Append array in matrix as \n in string
             frame.append(' ')
         return frame
     
