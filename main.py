@@ -15,10 +15,14 @@
 # the interactive shell
 
 # TODO
-# - add bar_h to verticalhorizontal_bar_graph
+# - improve var names
+# - add bar_h to verticalhorizontal_bar
 # - improve function logic
 # - improve bar graph legend logic
 # - improve pizza graph logic
+
+from tkinter import E
+
 
 class Plotter:
     def display(self, table_w, frame):
@@ -40,7 +44,7 @@ class Plotter:
                 print('Invalid direction')
         return frame
 
-    def horizontal_bar_graph(self, bar_w, columns):
+    def horizontal_bar(self, bar_w, columns):
         frame = []
         for column in columns:
             for line in range(column[0]):
@@ -60,7 +64,7 @@ class Plotter:
         # Reverse frame as array starts from top and frames and graphs from bottom
         return frame[::-1]
 
-    def vertical_bar_graph(self, rows):
+    def vertical_bar(self, rows):
         frame = []
         # Find the largest label
         l_label = 0
@@ -75,7 +79,7 @@ class Plotter:
                 frame.insert(i, label + ': ' + '#' * row[0])
         return frame[::-1]
 
-    def pizza_graph(self, table_h, slices):
+    def pizza(self, table_h, slices):
         frame = []
         reverse = False
         for slice in slices:
@@ -91,7 +95,7 @@ class Plotter:
                     frame.insert(line, '@' * (2 * c))
         return frame
 
-    def function_graph(self, scale, function):
+    def function(self, scale, function):
         frame = []
         # (0,0) in cartesian plane
         zero = round((scale * 2) / 2)
@@ -154,7 +158,7 @@ class Plotter:
             (2, 'Japan'),
             (9, 'Canada')
         ]
-        frame = self.horizontal_bar_graph(4, columns)
+        frame = self.horizontal_bar(4, columns)
         frame = self.align(table_w, frame, 'l')
         self.display(table_w, frame)
 
@@ -169,7 +173,7 @@ class Plotter:
             (60, 'Germany'),
             (50, 'Poland')
         ]
-        frame = self.pizza_graph(table_h, slices)
+        frame = self.pizza(table_h, slices)
         frame = self.align(table_w, frame, 'c')
         self.display(table_w, frame)
 
@@ -182,7 +186,7 @@ class Plotter:
             (2, 'Japan'),
             (9, 'Canada')
         ]
-        frame = self.vertical_bar_graph(rows)
+        frame = self.vertical_bar(rows)
         frame = self.align(table_w, frame, 'l')
         self.display(table_w, frame)
 
@@ -191,22 +195,22 @@ class Plotter:
         function = 'x+x'
         # 5 to left, right, top, bottom from 0
         cartesian_plane = 5
-        frame = self.function_graph(cartesian_plane, function)
+        frame = self.function(cartesian_plane, function)
         frame = self.align(table_w, frame, 'c')
         self.display(table_w, frame)
         # Another function
         function = 'x+1'
-        frame = self.function_graph(cartesian_plane, function)
+        frame = self.function(cartesian_plane, function)
         frame = self.align(table_w, frame, 'c')
         self.display(table_w, frame)
         # One more
         function = '2'
-        frame = self.function_graph(cartesian_plane, function)
+        frame = self.function(cartesian_plane, function)
         frame = self.align(table_w, frame, 'c')
         self.display(table_w, frame)
         # Last one I promise
         function = 'x - x * 2'
-        frame = self.function_graph(cartesian_plane, function)
+        frame = self.function(cartesian_plane, function)
         frame = self.align(table_w, frame, 'c')
         self.display(table_w, frame)
 
@@ -217,15 +221,34 @@ class Plotter:
         self.example_vertical_bar()
         self.example_function()
 
+def help():
+    print(' Examples       : e ')
+    print(' Help           : h ')
+    print(' Clear          : c ')
+    print(' Text           : t ')
+
 def menu():
     p = Plotter()
-    print('Examples : e')
-    print('Clear    : c')
+    print('Type "h" for help ')
     while 1:
         option = input('@-->> ')
-        if (option == 'e'):
+        if option == 'e':
             p.examples()
-        if (option == 'c'):
+        if option == 'h':
+            help()
+        if option == 'c':
             print("\033[H\033[J", end="")
+        if option == 't':
+            table_w = int(input('Table width: '))
+            frame = []
+            end = 'no'
+            position = ''
+            while end != 'y':
+                frame.append(input('Text to append: '))
+                end = input('End (y, n): ')
+            while position not in ('r','l','c'):
+                position = input('Position (l, r, c): ')
+            frame = p.align(table_w, frame, position)
+            p.display(table_w, frame)
 
 menu()
