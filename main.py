@@ -15,10 +15,17 @@
 # the interactive shell
 
 # TODO
-# - add bar height to vertical bar
+# - improve label logic and add bar height to vertical bar
+#   - find bar height midle point
 # - improve function logic
-# - improve bar label logic
+#   - make negative regions work
 # - improve pizza logic
+#   - implement sin, cos, tan functions
+# - zoom in zoom out
+#   - add shell to last display
+#   - display last parameters with updated display t_width
+# - move through frame
+#   - add focus position
 
 class Plotter:
     def display(self, table_width, frame):
