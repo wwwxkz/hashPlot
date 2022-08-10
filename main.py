@@ -21,9 +21,6 @@
 # - improve bar graph legend logic
 # - improve pizza graph logic
 
-from tkinter import E
-
-
 class Plotter:
     def display(self, table_w, frame):
         print('-' * table_w)
@@ -227,7 +224,7 @@ def help():
     print(' Clear          : c ')
     print(' Text           : t ')
     print(' Horizontal Bar : b ')
-    #print(' Pizza Bar      : p ')
+    print(' Pizza Bar      : p ')
     print(' Vertical Bar   : v ')
     #print(' Function       : f ')
 
@@ -242,7 +239,7 @@ def menu():
             help()
         if option == 'c':
             print("\033[H\033[J", end="")
-        if option == 't' or option == 'b' or option == 'v':
+        if option == 't' or option == 'b' or option == 'v' or option == 'p':
             table_w = int(input('Table width: '))
             frame = []
             end = 'no'
@@ -264,7 +261,16 @@ def menu():
             frame = p.horizontal_bar(bar_width, frame)
             frame = p.align(table_w, frame, position)
             p.display(table_w, frame)
-        #if option == 'p':
+        if option == 'p':
+            table_h = int(input('Table Height: '))
+            while end != 'y':
+                row = (int(input('Slice Value: ')), input('Slice Label: '))
+                frame.append(row)
+                end = input('End (y, n): ')
+            frame = p.pizza(table_h, frame)
+            frame = p.align(table_w, frame, position)
+            p.display(table_w, frame)
+
         if option == 'v':
             while end != 'y':
                 row = (int(input('Row Value: ')), input('Row Label: '))
@@ -274,6 +280,5 @@ def menu():
             frame = p.align(table_w, frame, position)
             p.display(table_w, frame)
         #if option == 'f':
-
 
 menu()
