@@ -15,6 +15,7 @@
 # the interactive shell
 
 # TODO
+# - improve pizza drawing
 # - improve horizontal bar label logic
 #   - align labels space around
 #   - align bars with labels
