@@ -19,7 +19,6 @@
 # - could _bar and _vertical_bar be the same func?
 # - improve bar graph legend logic
 # - improve pizza graph logic
-# - add function_graph
 # - func names
 # - interactive shell
 # - multiple screens
