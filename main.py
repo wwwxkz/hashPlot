@@ -88,22 +88,46 @@ def _function_graph(table_w, scale, function):
     zero = round((scale * 2) / 2)
     # Positive and negative (exmp -> -5 left +5 right)
     # +1 to add 0 position
-    for x, point in enumerate(range((scale * 2) + 1)):
-        # Create y axis
-        frame.append('')
-        for c, pointer in enumerate(range((scale * 2) + 1)):
-            # Creates x axis
-            if c == zero:
-                frame[x] += ('|')
+
+    # Get function positions (x,y) based on scale
+    res_y = []
+    for p, _ in enumerate(range((scale * 2) + 1)):
+        # Best way but slow
+        # Slice string by math operators to get Y afterwards
+        #operators = "+-*/"
+        #function_slit = ""
+        #for i in replace_x:
+        #    if i in operators:
+        #        function_slit+="@"+i+"@"
+        #    else:
+        #        function_slit+=i
+        #function_slit=function_slit.split("@")
+        #print('String broken: ', function_slit) 
+
+        # Faster and Convenient way
+        replace_x = str(function.replace('x', str(p)))
+        res_y.append(eval(replace_x))
+    print('Points: ', res_y)
+    # Create y axis
+    for y, point in enumerate(range((scale * 2) + 1)):
+        frame.append('')      
+        # Creates x axis
+        for x, pointer in enumerate(range((scale * 2) + 1)):
+            if x == zero:
+                frame[y] += '|'
             else:
-                if x == zero:
-                    frame[x] += '-'
+                if y == zero:
+                    frame[y] += '-'
                 else:
-                    frame[x] += ' '
-        #frame[x][3] = 'teste'
-        #print(function.replace('x', str(x)))
-    for i in frame:
-        print(''.join(map(str, i)))
+                    frame[y] += ' '
+        # Does the function pass thought this point?
+        # Else, default values |, -, ' '
+        # Replacing vars by scale of the cartesian plane 
+        # Using y for the sake of practicality
+        # as both y and x are the same there is no problem
+        for i in res_y:
+            if y == i:
+                frame[y] = frame[y][:i] + '@' + frame[y][i:] 
     return frame
 
 def _align(table_w, frame, direction):
@@ -187,8 +211,8 @@ def _exmp_function():
     # 5 to left, right, top, bottom from 0
     cartesian_plane = 5
     frame = _function_graph(table_w, cartesian_plane, function)
-    #frame = _align(table_w, frame, 'c')
-    #_display(table_w, frame)
+    frame = _align(table_w, frame, 'c')
+    _display(table_w, frame)
 
 _exmp_text()
 _exmp_bar()
