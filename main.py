@@ -15,6 +15,8 @@
 # the interactive shell 
 
 # TODO
+# - remove numpy
+# - improve function logic
 # - could _bar and _vertical_bar be the same func?
 # - improve bar graph legend logic
 # - improve pizza graph logic
@@ -23,6 +25,8 @@
 # - interactive shell
 # - multiple screens
 # - change func in the interactive shell
+
+import numpy as np
 
 def _display(table_w, frame):
     print('-' * table_w)
@@ -81,8 +85,30 @@ def _pizza_graph(table_w, table_h, slices):
                 frame.insert(line, '@' * (2 * c))
     return frame
 
-def _function_graph():
-    pass
+def _function_graph(table_w, scale, function):
+    frame = []
+    # (0,0) in cartesian plane
+    zero = round((scale * 2) / 2)
+    # Positive and negative (exmp -> -5 left +5 right)
+    # +1 to add 0 position
+    for x, point in enumerate(range((scale * 2) + 1)):
+        # Create y axis
+        frame.append([])
+        for c, pointer in enumerate(range((scale * 2) + 1)):
+            # Creates x axis
+            if x == zero:
+                frame[x].append('-')
+            else:
+                frame[x].append(' ')
+            if c == zero:
+                frame[x][c] = '|'
+
+        #frame[x][3] = 'teste'
+        #print(function.replace('x', str(x)))
+    print('Testing Frame: \n', np.matrix(frame))
+    #for i in frame:
+    #    print('\t'.join(map(str, i)))
+    return frame
 
 def _align(table_w, frame, direction):
     for i, line in enumerate(frame):
@@ -159,7 +185,17 @@ def _exmp_vertical_bar():
     frame = _align(table_w, frame, 'l')
     _display(table_w, frame)
 
+def _exmp_function():
+    table_w = 40
+    function = 'x+1'
+    # 5 to left, right, top, bottom from 0
+    cartesian_plane = 5
+    frame = _function_graph(table_w, cartesian_plane, function)
+    #frame = _align(table_w, frame, 'c')
+    #_display(table_w, frame)
+
 _exmp_text()
 _exmp_bar()
 _exmp_pizza()
 _exmp_vertical_bar()
+_exmp_function()
