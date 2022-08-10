@@ -86,25 +86,14 @@ def _function_graph(table_w, scale, function):
     frame = []
     # (0,0) in cartesian plane
     zero = round((scale * 2) / 2)
-    # Positive and negative (exmp -> -5 left +5 right)
-    # +1 to add 0 position
-
     # Get function positions (x,y) based on scale
     res_y = []
+    # Positive and negative (exmp -> -5 left +5 right)
+    # +1 to add 0 position
     for p, _ in enumerate(range((scale * 2) + 1)):
-        # Best way but slow
-        # Slice string by math operators to get Y afterwards
-        #operators = "+-*/"
-        #function_slit = ""
-        #for i in replace_x:
-        #    if i in operators:
-        #        function_slit+="@"+i+"@"
-        #    else:
-        #        function_slit+=i
-        #function_slit=function_slit.split("@")
-        #print('String broken: ', function_slit) 
-
-        # Faster and Convenient way
+        # Replacing x by scale of the cartesian plane 
+        # Using y for the sake of practicality
+        # as both y and x are the same there is no problem
         replace_x = str(function.replace('x', str(p)))
         res_y.append(eval(replace_x))
     print('Points: ', res_y)
@@ -122,12 +111,10 @@ def _function_graph(table_w, scale, function):
                     frame[y] += ' '
         # Does the function pass thought this point?
         # Else, default values |, -, ' '
-        # Replacing vars by scale of the cartesian plane 
-        # Using y for the sake of practicality
-        # as both y and x are the same there is no problem
         for i in res_y:
             if y == i:
-                frame[y] = frame[y][:i] + '@' + frame[y][i:] 
+                frame[y] = frame[y][:i] + '@' + frame[y][i:]
+                frame[y] = frame[y].replace('@ ', '@')
     return frame
 
 def _align(table_w, frame, direction):
@@ -207,7 +194,7 @@ def _exmp_vertical_bar():
 
 def _exmp_function():
     table_w = 40
-    function = 'x+1'
+    function = 'x+x'
     # 5 to left, right, top, bottom from 0
     cartesian_plane = 5
     frame = _function_graph(table_w, cartesian_plane, function)
