@@ -226,7 +226,7 @@ def help():
     print(' Horizontal Bar : b ')
     print(' Pizza Bar      : p ')
     print(' Vertical Bar   : v ')
-    #print(' Function       : f ')
+    print(' Function       : f ')
 
 def menu():
     p = Plotter()
@@ -239,8 +239,8 @@ def menu():
             help()
         if option == 'c':
             print("\033[H\033[J", end="")
-        if option == 't' or option == 'b' or option == 'v' or option == 'p':
-            table_w = int(input('Table width: '))
+        if option == 't' or option == 'b' or option == 'v' or option == 'p' or option == 'f':
+            table_w = int(input('Table width (40): '))
             frame = []
             end = 'no'
             position = ''
@@ -257,12 +257,12 @@ def menu():
                 column = (int(input('Column Value: ')), input('Column Label: '))
                 frame.append(column)
                 end = input('End (y, n): ')
-            bar_width = int(input('Bar width: '))
+            bar_width = int(input('Bar width (4): '))
             frame = p.horizontal_bar(bar_width, frame)
             frame = p.align(table_w, frame, position)
             p.display(table_w, frame)
         if option == 'p':
-            table_h = int(input('Table Height: '))
+            table_h = int(input('Table Height (10): '))
             while end != 'y':
                 row = (int(input('Slice Value: ')), input('Slice Label: '))
                 frame.append(row)
@@ -270,7 +270,6 @@ def menu():
             frame = p.pizza(table_h, frame)
             frame = p.align(table_w, frame, position)
             p.display(table_w, frame)
-
         if option == 'v':
             while end != 'y':
                 row = (int(input('Row Value: ')), input('Row Label: '))
@@ -279,6 +278,10 @@ def menu():
             frame = p.vertical_bar(frame)
             frame = p.align(table_w, frame, position)
             p.display(table_w, frame)
-        #if option == 'f':
-
+        if option == 'f':
+            function = input('Function (x+x): ')
+            cartesian_plane = int(input('Catersian Plane (5): '))
+            frame = p.function(cartesian_plane, function)
+            frame = p.align(table_w, frame, position)
+            p.display(table_w, frame)
 menu()
