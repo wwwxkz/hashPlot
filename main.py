@@ -226,6 +226,10 @@ def help():
     print(' Help           : h ')
     print(' Clear          : c ')
     print(' Text           : t ')
+    print(' Horizontal Bar : b ')
+    #print(' Pizza Bar      : p ')
+    #print(' Vertical Bar   : v ')
+    #print(' Function       : f ')
 
 def menu():
     p = Plotter()
@@ -238,16 +242,26 @@ def menu():
             help()
         if option == 'c':
             print("\033[H\033[J", end="")
-        if option == 't':
+        if option == 't' or option == 'b':
             table_w = int(input('Table width: '))
             frame = []
             end = 'no'
             position = ''
+            while position not in ('r','l','c'):
+                position = input('Position (l, r, c): ')
+        if option == 't':
             while end != 'y':
                 frame.append(input('Text to append: '))
                 end = input('End (y, n): ')
-            while position not in ('r','l','c'):
-                position = input('Position (l, r, c): ')
+            frame = p.align(table_w, frame, position)
+            p.display(table_w, frame)
+        if option == 'b':
+            while end != 'y':
+                column = (int(input('Column Value: ')), input('Column Label: '))
+                frame.append(column)
+                end = input('End (y, n): ')
+            bar_width = int(input('Bar width: '))
+            frame = p.horizontal_bar(bar_width, frame)
             frame = p.align(table_w, frame, position)
             p.display(table_w, frame)
 
