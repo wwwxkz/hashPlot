@@ -17,13 +17,8 @@
 # TODO
 # - add bar_h to verticalhorizontal_bar_graph
 # - improve function logic
-# - could _bar and _vertical_bar be the same func?
 # - improve bar graph legend logic
 # - improve pizza graph logic
-# - func names
-# - interactive shell
-# - multiple screens
-# - change func in the interactive shell
 
 class Plotter:
     def display(self, table_w, frame):
