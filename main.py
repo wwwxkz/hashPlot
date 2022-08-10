@@ -15,7 +15,6 @@
 # the interactive shell 
 
 # TODO
-# - remove numpy
 # - improve function logic
 # - could _bar and _vertical_bar be the same func?
 # - improve bar graph legend logic
@@ -25,8 +24,6 @@
 # - interactive shell
 # - multiple screens
 # - change func in the interactive shell
-
-import numpy as np
 
 def _display(table_w, frame):
     print('-' * table_w)
@@ -93,21 +90,20 @@ def _function_graph(table_w, scale, function):
     # +1 to add 0 position
     for x, point in enumerate(range((scale * 2) + 1)):
         # Create y axis
-        frame.append([])
+        frame.append('')
         for c, pointer in enumerate(range((scale * 2) + 1)):
             # Creates x axis
-            if x == zero:
-                frame[x].append('-')
-            else:
-                frame[x].append(' ')
             if c == zero:
-                frame[x][c] = '|'
-
+                frame[x] += ('|')
+            else:
+                if x == zero:
+                    frame[x] += '-'
+                else:
+                    frame[x] += ' '
         #frame[x][3] = 'teste'
         #print(function.replace('x', str(x)))
-    print('Testing Frame: \n', np.matrix(frame))
-    #for i in frame:
-    #    print('\t'.join(map(str, i)))
+    for i in frame:
+        print(''.join(map(str, i)))
     return frame
 
 def _align(table_w, frame, direction):
