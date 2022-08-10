@@ -15,7 +15,7 @@
 # the interactive shell
 
 # TODO
-# - improve pizza drawing
+# - remove last frame logic from pizza
 # - improve horizontal bar label logic
 #   - align labels space around
 #   - align bars with labels
@@ -86,22 +86,22 @@ class Plotter:
                 frame.insert(i, label + ': ' + '#' * row[0])
         return frame[::-1]
 
-    def pizza(self, table_height, slices):
-        frame = []
-        reverse = False
-        for slice in slices:
-            # Create circle
-            for c, line in enumerate(range(table_height)):
-                if c == table_height/2:
-                    reverse = True
-                if reverse == True:
-                    c = table_height - c
-                try:
-                    frame[line] += '@'
-                except:
-                    frame.insert(line, '@' * (2 * c))
+    def pizza(self, radius, slices):
+        frame = [' ']
+        last_frame = 0
+        rec = 2 * radius + 1
+        for i in range(rec):
+            for j in range(rec):
+                x = i - radius
+                y = j - radius
+                if x * x + y * y <= radius * radius + 1:
+                    frame[last_frame] += '#'
+                else:
+                    frame[last_frame] += ' '
+            last_frame += 1
+            frame.append(' ')
         return frame
-
+    
     def function(self, scale, function):
         frame = []
         # (0,0) in cartesian plane
@@ -171,7 +171,6 @@ class Plotter:
 
     def example_pizza(self):
         table_width = 40
-        table_height = 10
         slices = [
             (20, 'New Zeland'),
             (50, 'Australia'),
@@ -180,7 +179,7 @@ class Plotter:
             (60, 'Germany'),
             (50, 'Poland')
         ]
-        frame = self.pizza(table_height, slices)
+        frame = self.pizza(8, slices)
         frame = self.align(table_width, frame, 'c')
         self.display(table_width, frame)
 
@@ -273,12 +272,12 @@ def menu():
             frame = p.align(table_width, frame, position)
             p.display(table_width, frame)
         if option == 'p':
-            table_height = int(input('Table Height (10): '))
+            radius = int(input('Radius (8): '))
             while end != 'y':
                 row = (int(input('Slice Value: ')), input('Slice Label: '))
                 frame.append(row)
                 end = input('End (y, n): ')
-            frame = p.pizza(table_height, frame)
+            frame = p.pizza(radius, frame)
             frame = p.align(table_width, frame, position)
             p.display(table_width, frame)
         if option == 'v':
