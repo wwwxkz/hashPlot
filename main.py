@@ -15,7 +15,10 @@
 # the interactive shell
 
 # TODO
-# - improve label logic and add bar height to vertical bar
+# - improve horizontal bar label logic
+#   - align labels space around
+#   - align bars with labels
+# - add bar height to vertical bar
 #   - find bar height midle point
 # - improve function logic
 #   - make negative regions work
