@@ -114,6 +114,9 @@ def _function_graph(table_w, scale, function):
             if y == i:
                 frame[y] = frame[y][:i] + '@' + frame[y][i:]
                 frame[y] = frame[y].replace('@ ', '@')
+                # Are we at the center?
+                if y == zero:
+                    frame[y] = frame[y].replace('@|', '@')
     return frame
 
 def _align(table_w, frame, direction):
@@ -196,6 +199,21 @@ def _exmp_function():
     function = 'x+x'
     # 5 to left, right, top, bottom from 0
     cartesian_plane = 5
+    frame = _function_graph(table_w, cartesian_plane, function)
+    frame = _align(table_w, frame, 'c')
+    _display(table_w, frame)
+    # Another function
+    function = 'x+1'
+    frame = _function_graph(table_w, cartesian_plane, function)
+    frame = _align(table_w, frame, 'c')
+    _display(table_w, frame)
+    # One more
+    function = '2'
+    frame = _function_graph(table_w, cartesian_plane, function)
+    frame = _align(table_w, frame, 'c')
+    _display(table_w, frame)
+    # Last one I promise
+    function = 'x - x * 2'
     frame = _function_graph(table_w, cartesian_plane, function)
     frame = _align(table_w, frame, 'c')
     _display(table_w, frame)
