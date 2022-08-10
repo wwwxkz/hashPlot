@@ -27,6 +27,19 @@ class Plotter:
             print('|' + line + '|')
         print('-' * table_w)
 
+    def align(self, table_w, frame, direction):
+        for i, line in enumerate(frame):
+            spaces = int(table_w - len(line)) - 2
+            if direction == 'r':
+                frame[i] = ' ' * spaces + line
+            elif direction == 'l':
+                frame[i] = line + ' ' * spaces
+            elif direction == 'c':
+                frame[i] = ' ' * int(spaces/2) + line + ' ' * int(spaces/2)
+            else:
+                print('Invalid direction')
+        return frame
+
     def horizontal_bar_graph(self, bar_w, columns):
         frame = []
         for column in columns:
@@ -116,20 +129,6 @@ class Plotter:
                         frame[y] = frame[y].replace('@|', '@')
         return frame
 
-    def align(self, table_w, frame, direction):
-        for i, line in enumerate(frame):
-            spaces = int(table_w - len(line)) - 2
-            if direction == 'r':
-                frame[i] = ' ' * spaces + line
-            elif direction == 'l':
-                frame[i] = line + ' ' * spaces
-            elif direction == 'c':
-                frame[i] = ' ' * int(spaces/2) + line + ' ' * int(spaces/2)
-            else:
-                print('Invalid direction')
-        return frame
-
-    # EXAMPLE DISPLAY TEXT
     def example_text(self):
         # Set table (display) size as a var for convenience
         table_w = 40
@@ -218,7 +217,6 @@ class Plotter:
         self.example_vertical_bar()
         self.example_function()
 
-
 def menu():
     p = Plotter()
     print('Examples : e')
@@ -229,6 +227,5 @@ def menu():
             p.examples()
         if (option == 'c'):
             print("\033[H\033[J", end="")
-
 
 menu()
