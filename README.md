@@ -39,14 +39,16 @@ Programming with no goal, thought about making an program to state questions (si
 - [X] Separate examples from menu
 - [X] Separate menu from main
 - [X] Refactor code into classes and archives
+- [ ] Improve function logic
+	- [X] By making negative regions work
+	- [ ] By using different values to x and y
+	- [ ] By making exponential work as expected x²
 - [ ] Remove last frame logic from pizza
 - [ ] Improve horizontal bar label logic
 	- [ ] Align labels by space around
 	- [ ] Align bars with labels 
 - [ ] Add bar height to vertical bar
 	- [ ] By finding bar height midle point
-- [ ] Improve function logic
-	- [ ] By making negative regions work
 - [ ] Improve pizza logic
 	- [ ] by implementing sin, cos, tan functions
 - [ ] Add zoom in/out
