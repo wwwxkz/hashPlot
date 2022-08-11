@@ -87,7 +87,10 @@ class Plotter:
             # as both y and x are the same there is no problem
             replace_x = str(function.replace('x', str(p)))
             res_y.append(zero - eval(replace_x))
-        print('Points: ', res_y)
+            # for negative section 
+            # x = -5, -4, -3, -2, -1
+            replace_x = str(function.replace('x', str(-p)))
+            res_y.append(zero - eval(replace_x))
         # Create y axis
         for y, point in enumerate(range((scale * 2) + 1)):
             frame.append('')
