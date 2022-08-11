@@ -82,8 +82,6 @@ class Plotter:
         # +1 to add 0 position
         for p, _ in enumerate(range((scale * 2) + 1)):
             # Replacing x by scale of the cartesian plane
-            # Using y for the sake of practicality
-            # as both y and x are the same there is no problem
             replace_x = str(function.replace('x', str(p)))
             res_y.append(zero - eval(replace_x))
         for p, _ in enumerate(range((scale * 2) + 1)):
