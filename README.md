@@ -45,6 +45,13 @@ Programming with no goal, thought about making an program to state questions (si
 	- [ ] By using different values to x and y
 	- [X] By making exponential work as expected x²
 	- [ ] By fixing presentation error 'space error'
+- [ ] Add zoom in/out
+	- [ ] By adding shell to last plot
+		- [ ] By adding a while loop and re-display function
+			- [ ] By displaying last parameters with updated display t_width
+- [ ] Add move through plot
+	- [ ] By adding a focus point
+- [ ] Refactor function
 - [ ] Remove last frame logic from pizza
 - [ ] Improve horizontal bar label logic
 	- [ ] Align labels by space around
@@ -53,9 +60,3 @@ Programming with no goal, thought about making an program to state questions (si
 	- [ ] By finding bar height midle point
 - [ ] Improve pizza logic
 	- [ ] by implementing sin, cos, tan functions
-- [ ] Add zoom in/out
-	- [ ] By adding shell to last plot
-		- [ ] By adding a while loop and re-display function
-			- [ ] By displaying last parameters with updated display t_width
-- [ ] Add move through plot
-	- [ ] By adding a focus point
