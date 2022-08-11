@@ -74,7 +74,9 @@ class Plotter:
     def function(self, scale, function):
         frame = []
         # (0,0) in cartesian plane
-        zero = round((scale * 2) / 2)
+        # if not even, round it to the next number and do not
+        # nothing as it has a middle number
+        zero = round(scale)
         # Get function positions (x,y) based on scale
         res_y = []
         # Positive and negative (exmp -> -5 left +5 right)
@@ -84,7 +86,7 @@ class Plotter:
             # Using y for the sake of practicality
             # as both y and x are the same there is no problem
             replace_x = str(function.replace('x', str(p)))
-            res_y.append(eval(replace_x))
+            res_y.append(zero - eval(replace_x))
         print('Points: ', res_y)
         # Create y axis
         for y, point in enumerate(range((scale * 2) + 1)):
@@ -102,6 +104,18 @@ class Plotter:
             # Else, default values |, -, ' '
             for i in res_y:
                 if y == i:
+                    # invert side of i
+                    # if it is in 3 in a scale of 0-11 with the middle point 6
+                    # i will turn 9, and if it is 9 it will turn 3
+                    # in that will we can centralize the x and y at the middle point
+                    # of our cartesian table
+                    # that is because an array will always start in 0 from the left
+                    if i > scale:
+                        distance_from_zero =  i - scale
+                        i = scale - distance_from_zero
+                    else:
+                        distance_from_zero = scale - i
+                        i = scale + distance_from_zero
                     frame[y] = frame[y][:i] + '@' + frame[y][i:]
                     frame[y] = frame[y].replace('@ ', '@')
                     # Are we at the center?
