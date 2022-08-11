@@ -14,8 +14,6 @@ class Plotter:
                 frame[i] = line + ' ' * spaces
             elif direction == 'c':
                 frame[i] = ' ' * int(spaces/2) + line + ' ' * int(spaces/2)
-            else:
-                print('Invalid direction')
         return frame
 
     def horizontal_bar(self, bar_w, columns):
@@ -93,8 +91,6 @@ class Plotter:
             # x = -5, -4, -3, -2, -1
             replace_x = str(function.replace('x', str(-p)))
             res_y_negative.append(zero + eval(replace_x))
-        print('res_y: ', res_y)
-        print('res_y_n: ', res_y_negative)
         # Create y axis
         for y, point in enumerate(range((scale * 2) + 1)):
             frame.append('')
@@ -130,7 +126,7 @@ class Plotter:
                     if y == zero:
                         frame[y] = frame[y].replace('@|', '@')
                 if y == res_y_negative[index]:
-                    print('i: ', i)
                     frame[y] = frame[y][:i] + '@' + frame[y][i:]
                     frame[y] = frame[y].replace('@ ', '@')
+        print(function)
         return frame
