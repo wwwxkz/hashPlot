@@ -85,3 +85,8 @@ class Examples:
         frame = plotter.function(cartesian_plane, function)
         frame = plotter.align(table_width, frame, 'c')
         plotter.display(table_width, frame)
+        # Sorry I have to make x² work
+        function = 'x**2'
+        frame = plotter.function(cartesian_plane, function)
+        frame = plotter.align(table_width, frame, 'c')
+        plotter.display(table_width, frame)

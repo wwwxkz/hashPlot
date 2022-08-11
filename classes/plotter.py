@@ -79,6 +79,7 @@ class Plotter:
         zero = round(scale)
         # Get function positions (x,y) based on scale
         res_y = []
+        res_y_negative = []
         # Positive and negative (exmp -> -5 left +5 right)
         # +1 to add 0 position
         for p, _ in enumerate(range((scale * 2) + 1)):
@@ -87,10 +88,13 @@ class Plotter:
             # as both y and x are the same there is no problem
             replace_x = str(function.replace('x', str(p)))
             res_y.append(zero - eval(replace_x))
+        for p, _ in enumerate(range((scale * 2) + 1)):
             # for negative section 
             # x = -5, -4, -3, -2, -1
             replace_x = str(function.replace('x', str(-p)))
-            res_y.append(zero - eval(replace_x))
+            res_y_negative.append(zero + eval(replace_x))
+        print('res_y: ', res_y)
+        print('res_y_n: ', res_y_negative)
         # Create y axis
         for y, point in enumerate(range((scale * 2) + 1)):
             frame.append('')
@@ -105,7 +109,7 @@ class Plotter:
                         frame[y] += ' '
             # Does the function pass thought this point?
             # Else, default values |, -, ' '
-            for i in res_y:
+            for index, i in enumerate(res_y): # index for using the same loop for res_y_negative
                 if y == i:
                     # invert side of i
                     # if it is in 3 in a scale of 0-11 with the middle point 6
@@ -115,13 +119,18 @@ class Plotter:
                     # that is because an array will always start in 0 from the left
                     if i > scale:
                         distance_from_zero =  i - scale
-                        i = scale - distance_from_zero
+                        # i positive
+                        i_p = scale - distance_from_zero
                     else:
                         distance_from_zero = scale - i
-                        i = scale + distance_from_zero
-                    frame[y] = frame[y][:i] + '@' + frame[y][i:]
+                        i_p = scale + distance_from_zero
+                    frame[y] = frame[y][:i_p] + '@' + frame[y][i_p:]
                     frame[y] = frame[y].replace('@ ', '@')
                     # Are we at the center?
                     if y == zero:
                         frame[y] = frame[y].replace('@|', '@')
+                if y == res_y_negative[index]:
+                    print('i: ', i)
+                    frame[y] = frame[y][:i] + '@' + frame[y][i:]
+                    frame[y] = frame[y].replace('@ ', '@')
         return frame

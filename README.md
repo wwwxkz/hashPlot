@@ -41,9 +41,10 @@ Programming with no goal, thought about making an program to state questions (si
 - [X] Refactor code into classes and archives
 - [ ] Improve function logic
 	- [X] By making negative regions work
-	- [ ] By removing duplicates when creating x negative section
+	- [X] By removing duplicates when creating x negative section
 	- [ ] By using different values to x and y
-	- [ ] By making exponential work as expected x²
+	- [X] By making exponential work as expected x²
+	- [ ] By fixing presentation error 'space error'
 - [ ] Remove last frame logic from pizza
 - [ ] Improve horizontal bar label logic
 	- [ ] Align labels by space around
