@@ -142,7 +142,85 @@ class Plotter:
                         frame[y] = frame[y].replace('@|', '@')
         return frame
 
-    def example_text(self):
+class Menu:
+    def help(self):
+        print(' Examples       : e ')
+        print(' Help           : h ')
+        print(' Clear          : c ')
+        print(' Text           : t ')
+        print(' Horizontal Bar : b ')
+        print(' Pizza Bar      : p ')
+        print(' Vertical Bar   : v ')
+        print(' Function       : f ')
+        print(' Quit           : q ')
+
+    def menu(self):
+        p = Plotter()
+        print('Type "h" for help ')
+        while 1:
+            option = input('@-->> ')
+            if option == 'e':
+                self.examples(p)
+            if option == 'h':
+                self.help()
+            if option == 'c':
+                print("\033[H\033[J", end="")
+            if option == 't' or option == 'b' or option == 'v' or option == 'p' or option == 'f':
+                table_width = int(input('Table width (40): '))
+                frame = []
+                end = 'no'
+                position = ''
+                while position not in ('r','l','c'):
+                    position = input('Position (l, r, c): ')
+            if option == 't':
+                while end != 'y':
+                    frame.append(input('Text to append: '))
+                    end = input('End (y, n): ')
+                frame = p.align(table_width, frame, position)
+                p.display(table_width, frame)
+            if option == 'b':
+                while end != 'y':
+                    column = (int(input('Column Value: ')), input('Column Label: '))
+                    frame.append(column)
+                    end = input('End (y, n): ')
+                bar_width = int(input('Bar width (4): '))
+                frame = p.horizontal_bar(bar_width, frame)
+                frame = p.align(table_width, frame, position)
+                p.display(table_width, frame)
+            if option == 'p':
+                radius = int(input('Radius (8): '))
+                while end != 'y':
+                    row = (int(input('Slice Value: ')), input('Slice Label: '))
+                    frame.append(row)
+                    end = input('End (y, n): ')
+                frame = p.pizza(radius, frame)
+                frame = p.align(table_width, frame, position)
+                p.display(table_width, frame)
+            if option == 'v':
+                while end != 'y':
+                    row = (int(input('Row Value: ')), input('Row Label: '))
+                    frame.append(row)
+                    end = input('End (y, n): ')
+                frame = p.vertical_bar(frame)
+                frame = p.align(table_width, frame, position)
+                p.display(table_width, frame)
+            if option == 'f':
+                function = input('Function (x+x): ')
+                cartesian_plane = int(input('Catersian Plane (5): '))
+                frame = p.function(cartesian_plane, function)
+                frame = p.align(table_width, frame, position)
+                p.display(table_width, frame)
+            if option == 'q':
+                raise SystemExit
+
+    def examples(self, p):
+        self.example_text(p)
+        self.example_horizontal_bar(p)
+        self.example_pizza(p)
+        self.example_vertical_bar(p)
+        self.example_function(p)
+
+    def example_text(self, p):
         # Set table (display) size as a var for convenience
         table_width = 40
         # Display anything you want
@@ -153,11 +231,11 @@ class Plotter:
             'Is that even a question?'
         ]
         # Align text to R, L, C
-        frame = self.align(table_width, frame, 'r')
+        frame = p.align(table_width, frame, 'r')
         # Pass desired frame and table (display) size
-        self.display(table_width, frame)
+        p.display(table_width, frame)
 
-    def example_horizontal_bar(self):
+    def example_horizontal_bar(self, p):
         # Set bar graph columns as tuple matrixes
         table_width = 40
         columns = [
@@ -167,11 +245,11 @@ class Plotter:
             (2, 'Japan'),
             (9, 'Canada')
         ]
-        frame = self.horizontal_bar(4, columns)
-        frame = self.align(table_width, frame, 'l')
-        self.display(table_width, frame)
+        frame = p.horizontal_bar(4, columns)
+        frame = p.align(table_width, frame, 'l')
+        p.display(table_width, frame)
 
-    def example_pizza(self):
+    def example_pizza(self, p):
         table_width = 40
         slices = [
             (20, 'New Zeland'),
@@ -181,11 +259,11 @@ class Plotter:
             (60, 'Germany'),
             (50, 'Poland')
         ]
-        frame = self.pizza(8, slices)
-        frame = self.align(table_width, frame, 'c')
-        self.display(table_width, frame)
+        frame = p.pizza(8, slices)
+        frame = p.align(table_width, frame, 'c')
+        p.display(table_width, frame)
 
-    def example_vertical_bar(self):
+    def example_vertical_bar(self, p):
         table_width = 40
         rows = [
             (4, 'Russia'),
@@ -194,108 +272,33 @@ class Plotter:
             (2, 'Japan'),
             (9, 'Canada')
         ]
-        frame = self.vertical_bar(rows)
-        frame = self.align(table_width, frame, 'l')
-        self.display(table_width, frame)
+        frame = p.vertical_bar(rows)
+        frame = p.align(table_width, frame, 'l')
+        p.display(table_width, frame)
 
-    def example_function(self):
+    def example_function(self, p):
         table_width = 40
         function = 'x+x'
         # 5 to left, right, top, bottom from 0
         cartesian_plane = 5
-        frame = self.function(cartesian_plane, function)
-        frame = self.align(table_width, frame, 'c')
-        self.display(table_width, frame)
+        frame = p.function(cartesian_plane, function)
+        frame = p.align(table_width, frame, 'c')
+        p.display(table_width, frame)
         # Another function
         function = 'x+1'
-        frame = self.function(cartesian_plane, function)
-        frame = self.align(table_width, frame, 'c')
-        self.display(table_width, frame)
+        frame = p.function(cartesian_plane, function)
+        frame = p.align(table_width, frame, 'c')
+        p.display(table_width, frame)
         # One more
         function = '2'
-        frame = self.function(cartesian_plane, function)
-        frame = self.align(table_width, frame, 'c')
-        self.display(table_width, frame)
+        frame = p.function(cartesian_plane, function)
+        frame = p.align(table_width, frame, 'c')
+        p.display(table_width, frame)
         # Last one I promise
         function = 'x - x * 2'
-        frame = self.function(cartesian_plane, function)
-        frame = self.align(table_width, frame, 'c')
-        self.display(table_width, frame)
+        frame = p.function(cartesian_plane, function)
+        frame = p.align(table_width, frame, 'c')
+        p.display(table_width, frame)
 
-    def examples(self):
-        self.example_text()
-        self.example_horizontal_bar()
-        self.example_pizza()
-        self.example_vertical_bar()
-        self.example_function()
-
-def help():
-    print(' Examples       : e ')
-    print(' Help           : h ')
-    print(' Clear          : c ')
-    print(' Text           : t ')
-    print(' Horizontal Bar : b ')
-    print(' Pizza Bar      : p ')
-    print(' Vertical Bar   : v ')
-    print(' Function       : f ')
-    print(' Quit           : q ')
-
-def menu():
-    p = Plotter()
-    print('Type "h" for help ')
-    while 1:
-        option = input('@-->> ')
-        if option == 'e':
-            p.examples()
-        if option == 'h':
-            help()
-        if option == 'c':
-            print("\033[H\033[J", end="")
-        if option == 't' or option == 'b' or option == 'v' or option == 'p' or option == 'f':
-            table_width = int(input('Table width (40): '))
-            frame = []
-            end = 'no'
-            position = ''
-            while position not in ('r','l','c'):
-                position = input('Position (l, r, c): ')
-        if option == 't':
-            while end != 'y':
-                frame.append(input('Text to append: '))
-                end = input('End (y, n): ')
-            frame = p.align(table_width, frame, position)
-            p.display(table_width, frame)
-        if option == 'b':
-            while end != 'y':
-                column = (int(input('Column Value: ')), input('Column Label: '))
-                frame.append(column)
-                end = input('End (y, n): ')
-            bar_width = int(input('Bar width (4): '))
-            frame = p.horizontal_bar(bar_width, frame)
-            frame = p.align(table_width, frame, position)
-            p.display(table_width, frame)
-        if option == 'p':
-            radius = int(input('Radius (8): '))
-            while end != 'y':
-                row = (int(input('Slice Value: ')), input('Slice Label: '))
-                frame.append(row)
-                end = input('End (y, n): ')
-            frame = p.pizza(radius, frame)
-            frame = p.align(table_width, frame, position)
-            p.display(table_width, frame)
-        if option == 'v':
-            while end != 'y':
-                row = (int(input('Row Value: ')), input('Row Label: '))
-                frame.append(row)
-                end = input('End (y, n): ')
-            frame = p.vertical_bar(frame)
-            frame = p.align(table_width, frame, position)
-            p.display(table_width, frame)
-        if option == 'f':
-            function = input('Function (x+x): ')
-            cartesian_plane = int(input('Catersian Plane (5): '))
-            frame = p.function(cartesian_plane, function)
-            frame = p.align(table_width, frame, position)
-            p.display(table_width, frame)
-        if option == 'q':
-            raise SystemExit
-menu()
+m = Menu()
+m.menu()
