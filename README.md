@@ -12,6 +12,17 @@ Programming with no goal, thought about making an program to state questions (si
 ![](https://github.com/wwwxkz/hashPlot/blob/main/README/0.png)
 ![](https://github.com/wwwxkz/hashPlot/blob/main/README/1.png)
 
+### Dev rules
+```
+1 - DO NOT use any LIBRARY 
+2 - it HAS to be CONCISE
+3 - CLEAN instead of short
+4 - MINIMAL functions and classes sizes
+5 - STRAIGHTFORWARD use
+6 - CLEAN code does not need comments
+```
+
+(note: focusing in plotter.py from now on, I will implement all todos and improve the overall code quality of plotter)
 ### Dev progress
 - [X] Separate align from text plotter
 - [X] Add horizontal bar plotter
