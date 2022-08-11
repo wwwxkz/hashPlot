@@ -13,12 +13,21 @@ In python just because it is easy, and I was playing around with the interactive
 ![](https://github.com/wwwxkz/hashPlot/blob/main/README/1.png)
 
 ### Dev progress
+- [X] Separate align from text plotter
+- [X] Add horizontal bar plotter
+- [X] Add vertical bar plotter
+- [X] Add pizza plotter
 - [X] Add function plotter
 - [X] Remove numpy
 - [X] Add more descriptive variable names
 - [X] Add more descriptive function names
 - [X] Add interactive shell
 - [X] Multiple plots at the same time
+- [X] Fix pizza draw circle function
+- [X] Separate examples from plotter
+- [X] Separate examples from menu
+- [X] Separate menu from main
+- [X] Refactor code into classes and archives
 - [ ] Remove last frame logic from pizza
 - [ ] Improve horizontal bar label logic
 	- [ ] Align labels by space around
