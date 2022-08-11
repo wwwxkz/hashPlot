@@ -27,9 +27,10 @@
 #   - implement sin, cos, tan functions
 # - zoom in zoom out
 #   - add shell to last display
+#       - while loop and re-display func
 #   - display last parameters with updated display t_width
-# - move through frame
-#   - add focus position
+#   - move through frame
+#       - add focus position
 
 class Plotter:
     def display(self, table_width, frame):
@@ -155,12 +156,12 @@ class Menu:
         print(' Quit           : q ')
 
     def menu(self):
-        p = Plotter()
+        plotter = Plotter()
         print('Type "h" for help ')
         while 1:
             option = input('@-->> ')
             if option == 'e':
-                self.examples(p)
+                self.examples(plotter)
             if option == 'h':
                 self.help()
             if option == 'c':
@@ -176,51 +177,51 @@ class Menu:
                 while end != 'y':
                     frame.append(input('Text to append: '))
                     end = input('End (y, n): ')
-                frame = p.align(table_width, frame, position)
-                p.display(table_width, frame)
+                frame = plotter.align(table_width, frame, position)
+                plotter.display(table_width, frame)
             if option == 'b':
                 while end != 'y':
                     column = (int(input('Column Value: ')), input('Column Label: '))
                     frame.append(column)
                     end = input('End (y, n): ')
                 bar_width = int(input('Bar width (4): '))
-                frame = p.horizontal_bar(bar_width, frame)
-                frame = p.align(table_width, frame, position)
-                p.display(table_width, frame)
+                frame = plotter.horizontal_bar(bar_width, frame)
+                frame = plotter.align(table_width, frame, position)
+                plotter.display(table_width, frame)
             if option == 'p':
                 radius = int(input('Radius (8): '))
                 while end != 'y':
                     row = (int(input('Slice Value: ')), input('Slice Label: '))
                     frame.append(row)
                     end = input('End (y, n): ')
-                frame = p.pizza(radius, frame)
-                frame = p.align(table_width, frame, position)
-                p.display(table_width, frame)
+                frame = plotter.pizza(radius, frame)
+                frame = plotter.align(table_width, frame, position)
+                plotter.display(table_width, frame)
             if option == 'v':
                 while end != 'y':
                     row = (int(input('Row Value: ')), input('Row Label: '))
                     frame.append(row)
                     end = input('End (y, n): ')
-                frame = p.vertical_bar(frame)
-                frame = p.align(table_width, frame, position)
-                p.display(table_width, frame)
+                frame = plotter.vertical_bar(frame)
+                frame = plotter.align(table_width, frame, position)
+                plotter.display(table_width, frame)
             if option == 'f':
                 function = input('Function (x+x): ')
                 cartesian_plane = int(input('Catersian Plane (5): '))
-                frame = p.function(cartesian_plane, function)
-                frame = p.align(table_width, frame, position)
-                p.display(table_width, frame)
+                frame = plotter.function(cartesian_plane, function)
+                frame = plotter.align(table_width, frame, position)
+                plotter.display(table_width, frame)
             if option == 'q':
                 raise SystemExit
 
-    def examples(self, p):
-        self.example_text(p)
-        self.example_horizontal_bar(p)
-        self.example_pizza(p)
-        self.example_vertical_bar(p)
-        self.example_function(p)
+    def examples(self, plotter):
+        self.example_text(plotter)
+        self.example_horizontal_bar(plotter)
+        self.example_pizza(plotter)
+        self.example_vertical_bar(plotter)
+        self.example_function(plotter)
 
-    def example_text(self, p):
+    def example_text(self, plotter):
         # Set table (display) size as a var for convenience
         table_width = 40
         # Display anything you want
@@ -231,11 +232,11 @@ class Menu:
             'Is that even a question?'
         ]
         # Align text to R, L, C
-        frame = p.align(table_width, frame, 'r')
+        frame = plotter.align(table_width, frame, 'r')
         # Pass desired frame and table (display) size
-        p.display(table_width, frame)
+        plotter.display(table_width, frame)
 
-    def example_horizontal_bar(self, p):
+    def example_horizontal_bar(self, plotter):
         # Set bar graph columns as tuple matrixes
         table_width = 40
         columns = [
@@ -245,11 +246,11 @@ class Menu:
             (2, 'Japan'),
             (9, 'Canada')
         ]
-        frame = p.horizontal_bar(4, columns)
-        frame = p.align(table_width, frame, 'l')
-        p.display(table_width, frame)
+        frame = plotter.horizontal_bar(4, columns)
+        frame = plotter.align(table_width, frame, 'l')
+        plotter.display(table_width, frame)
 
-    def example_pizza(self, p):
+    def example_pizza(self, plotter):
         table_width = 40
         slices = [
             (20, 'New Zeland'),
@@ -259,11 +260,11 @@ class Menu:
             (60, 'Germany'),
             (50, 'Poland')
         ]
-        frame = p.pizza(8, slices)
-        frame = p.align(table_width, frame, 'c')
-        p.display(table_width, frame)
+        frame = plotter.pizza(8, slices)
+        frame = plotter.align(table_width, frame, 'c')
+        plotter.display(table_width, frame)
 
-    def example_vertical_bar(self, p):
+    def example_vertical_bar(self, plotter):
         table_width = 40
         rows = [
             (4, 'Russia'),
@@ -272,33 +273,33 @@ class Menu:
             (2, 'Japan'),
             (9, 'Canada')
         ]
-        frame = p.vertical_bar(rows)
-        frame = p.align(table_width, frame, 'l')
-        p.display(table_width, frame)
+        frame = plotter.vertical_bar(rows)
+        frame = plotter.align(table_width, frame, 'l')
+        plotter.display(table_width, frame)
 
-    def example_function(self, p):
+    def example_function(self, plotter):
         table_width = 40
         function = 'x+x'
         # 5 to left, right, top, bottom from 0
         cartesian_plane = 5
-        frame = p.function(cartesian_plane, function)
-        frame = p.align(table_width, frame, 'c')
-        p.display(table_width, frame)
+        frame = plotter.function(cartesian_plane, function)
+        frame = plotter.align(table_width, frame, 'c')
+        plotter.display(table_width, frame)
         # Another function
         function = 'x+1'
-        frame = p.function(cartesian_plane, function)
-        frame = p.align(table_width, frame, 'c')
-        p.display(table_width, frame)
+        frame = plotter.function(cartesian_plane, function)
+        frame = plotter.align(table_width, frame, 'c')
+        plotter.display(table_width, frame)
         # One more
         function = '2'
-        frame = p.function(cartesian_plane, function)
-        frame = p.align(table_width, frame, 'c')
-        p.display(table_width, frame)
+        frame = plotter.function(cartesian_plane, function)
+        frame = plotter.align(table_width, frame, 'c')
+        plotter.display(table_width, frame)
         # Last one I promise
         function = 'x - x * 2'
-        frame = p.function(cartesian_plane, function)
-        frame = p.align(table_width, frame, 'c')
-        p.display(table_width, frame)
+        frame = plotter.function(cartesian_plane, function)
+        frame = plotter.align(table_width, frame, 'c')
+        plotter.display(table_width, frame)
 
 m = Menu()
 m.menu()
