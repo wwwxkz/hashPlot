@@ -102,7 +102,6 @@ class Plotter:
                     else:
                         frame[y] += ' '
             # Does the function pass thought this point?
-            # Else, default values |, -, ' '
             for index, i in enumerate(res_y): # index for using the same loop for res_y_negative
                 if y == i:
                     # invert side of i
