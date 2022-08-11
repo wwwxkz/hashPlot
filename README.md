@@ -5,10 +5,10 @@
 - gitlab.com/wwwxkz
 - linkedin.com/wwwxkz
 ```
-Programming with no goal, thought about making an program to state questions (situations) and options to adress those like an notepad, but "funnier". It was a cool, but as I began I tought that making a geogebra in the console would be even better
+### Why
+Programming with no goal, thought about making an program to state questions (situations) and options to adress those like an notepad, but "funnier". It was a cool, but as I began I tought that making a geogebra in the console would be even better. In python just because it is easy, and I was playing around with the interactive shell
 
-In python just because it is easy, and I was playing around with the interactive shell
-
+### Runnning
 ![](https://github.com/wwwxkz/hashPlot/blob/main/README/0.png)
 ![](https://github.com/wwwxkz/hashPlot/blob/main/README/1.png)
 
